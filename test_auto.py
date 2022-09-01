@@ -15,24 +15,24 @@ base_url = "https://select2.org/selections"
 driver.get(base_url)
 driver.maximize_window()
 
-# Проверка наличия слов 'Built-in escaping'.
-# Способ №1. Проверка по всей странице.
+# Проверка наличия слов 'Built-in escaping'
+# Способ №1. Проверка по всей странице
 assert 'Built-in escaping' in driver.page_source
 
-# Способ №2. Проверка конкретного элемента.
+# Способ №2. Проверка в конкретном элементе
 assert 'Built-in escaping' == driver.find_element(By.ID, 'built-in-escaping').text
 
-# Открыть первый выпадающий список и выбрать 3-ий пункт
+# Открытие первого выпадающего списока и выбор 3-го пункта
 driver.find_element(By.XPATH, '//span[@class="select2-selection select2-selection--single"]').send_keys(Keys.RETURN + Keys.DOWN*2 + Keys.RETURN)
 
-# Сделать скриншот выбора и сохранить в папке screen
+# Сохранение сделанного скриншота в папку screen
 time.sleep(1)
 driver.save_screenshot('./screen/' + 'screenshot_' + datetime.datetime.utcnow().strftime('%Y.%m.%d_%H:%M:%S') + '.png')
 
-# Открыть второй выпадающий список и выбрать 2-ий пункт
+# Открытие второго выпадающего списока и выбор 2-го пункта
 driver.find_element(By.XPATH, '//span[@class="select2-selection select2-selection--multiple"]').send_keys(Keys.RETURN + Keys.DOWN + Keys.RETURN)
 
-# Сделать скриншот выбора и сохранить в папке screen
+# Сохранение сделанного скриншота в папку screen
 time.sleep(1)
 driver.save_screenshot('./screen/' + 'screenshot_' + datetime.datetime.utcnow().strftime('%Y.%m.%d_%H:%M:%S') + '.png')
 
@@ -40,6 +40,6 @@ driver.save_screenshot('./screen/' + 'screenshot_' + datetime.datetime.utcnow().
 driver.get(driver.find_element(By.LINK_TEXT, 'internal representation of the selected option').get_attribute('href'))
 assert driver.current_url == 'https://select2.org/options'
 
-# Закрытие веб-драйвер
+# Закрытие веб-драйвера
 time.sleep(2)
 driver.close()
